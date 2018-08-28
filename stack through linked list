@@ -1,0 +1,58 @@
+#include<stdio.h>
+#include <stdlib.h>
+#include <limits.h>
+struct stacknode
+{
+	int data;
+	struct stacknode *next;
+};
+struct stacknode* newnode(int data){
+	stacknode *node = (struct stacknode*) malloc(sizeof(struct stacknode));
+    node->data = data;
+    node->next = NULL;
+    	return node;
+    	
+} 
+int isempty(struct stacknode *root){
+	return !root;
+}
+
+void push(struct stacknode **root,int data){
+	stacknode*node = newnode(data);
+	node->next = (*root);
+	(*root)=node;
+	printf("%d is pushed to stack \n",node->data);
+	
+	
+}
+
+int pop(struct stacknode **root){
+	if(isempty((*root))){
+		
+		return INT_MIN;
+}
+	struct stacknode *temp = *root;
+	*root = (*root)->next;
+	int pop = temp->data;
+	free(temp);
+	printf("%d\n",pop);
+	
+}
+
+int peek(struct stacknode *root){
+		if(isempty((root))){
+		
+		return INT_MIN;
+}
+
+	
+	return root->data;
+}
+int main(){
+	struct stacknode *root =   NULL;
+	push(&root,1);
+	push(&root,2);
+	push(&root,3);
+	pop(&root);
+	printf("%d",peek(root));
+}
